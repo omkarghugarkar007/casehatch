@@ -1,6 +1,6 @@
 # CLI reference
 
-Available in the local `0.1.0-alpha.1` package. Build/install from the checkout or tarball; there is no published npm release yet. All CLI operations are deterministic and noninteractive. Planning happens in the user's existing agent session.
+Available in the `0.1.0-alpha.1` package. Install the [GitHub alpha tarball](https://github.com/omkarghugarkar007/casehatch/releases/tag/v0.1.0-alpha.1) or build from the checkout; there is no published npm registry release yet. All CLI operations are deterministic and noninteractive. Planning happens in the user's existing agent session.
 
 Global flags can appear before or after subcommands: `--cwd DIRECTORY`, `--format text|json|markdown|html`, `--help`, `--version`. JSON mode writes one machine-readable result to stdout; runner output is saved in the run log. Markdown/HTML renderers apply to check/report.
 

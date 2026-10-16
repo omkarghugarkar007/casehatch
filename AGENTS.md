@@ -1,6 +1,6 @@
 # Instructions for implementing CaseHatch
 
-This directory is currently a planning package. Do not infer that a CLI, npm package, agent skill or CI job already exists. Start from the current milestone in `IMPLEMENTATION_PLAN.md` and `docs/BACKLOG.md` when implementation is requested.
+This repository contains a working TypeScript + Playwright alpha. Read `docs/STATUS.md` for the implemented boundary and `docs/VALIDATION.md` for actual evidence before changing code. `IMPLEMENTATION_PLAN.md` and `docs/BACKLOG.md` retain the original acceptance criteria; use them with the current status rather than restarting completed milestones. GitHub issue numbers and historical backlog IDs are separate.
 
 ## Product constraints
 
@@ -38,4 +38,4 @@ This directory is currently a planning package. Do not infer that a CLI, npm pac
 - Module boundaries: `docs/ARCHITECTURE.md`
 - Work order: `docs/ROADMAP.md`, `docs/BACKLOG.md`
 
-No automatic public publishing or package release is part of this planning task.
+Public publishing and package releases require explicit user authorization. Do not infer authorization from a passing local check.

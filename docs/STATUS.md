@@ -1,6 +1,6 @@
 # Implementation status
 
-Updated 16 October 2026. **Working local MVP: `0.1.0-alpha.1`.** The repository began as a planning package. The original [implementation plan](../IMPLEMENTATION_PLAN.md), [backlog](BACKLOG.md), and design documents remain as a baseline; this document records what exists now.
+Updated 16 October 2026. **Working alpha: `0.1.0-alpha.1`.** The repository began as a planning package. The original [implementation plan](../IMPLEMENTATION_PLAN.md), [backlog](BACKLOG.md), and design documents remain as a baseline; this document records what exists now.
 
 ## Available
 
@@ -25,13 +25,13 @@ Updated 16 October 2026. **Working local MVP: `0.1.0-alpha.1`.** The repository 
 | M0 foundations / synthetic app             | Implemented and locally verified                                                                                                                   |
 | M1 context / decisions / plans             | Deterministic contracts implemented; bounded native trials reviewed; broader proposal quality and source conflict evaluation pending               |
 | M2 runner / freshness / coverage           | Implemented and locally verified against actual runner results                                                                                     |
-| M3 reports / CI / hook / false-green tests | Implemented; GitHub-hosted CI still needs its first remote run                                                                                     |
+| M3 reports / CI / hook / false-green tests | Implemented; all eight GitHub-hosted CI jobs passed ([run](https://github.com/omkarghugarkar007/casehatch/actions/runs/38943900962))               |
 | CH-017 native skills                       | Packaged, schema-validated, smoke-tested; exercised through real Codex and Sonnet/medium Claude Code sessions; clean-machine certification pending |
 | CH-020 held-out comparison                 | Pending: 20 changes / 3 repositories, matched agent baselines, repeated runs                                                                       |
-| CH-021 platform validation                 | Clean tarball verified locally on macOS ARM64 / Node 22; Linux and Node 24 are configured in CI but not claimed as locally run                     |
+| CH-021 platform validation                 | Linux/macOS × Node 22/24 × Playwright 1.63.0/1.64.1 CI passed; isolated package smoke passed locally and on Linux / Node 24                        |
 | CH-022 public demo                         | Working commands and actual seeded-defect reproduction; no edited video or benchmark claim                                                         |
 | CH-023 community                           | Public repository, MIT license, templates, Discussions, private vulnerability reporting and three scoped contributor issues ready                  |
-| CH-024 release / repeated users            | Pending: namespace reservation, public release, design partners and retention research                                                             |
+| CH-024 release / repeated users            | GitHub alpha distribution; npm registry release, design partners and retention research remain pending                                             |
 
 ## Supported boundary
 

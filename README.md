@@ -8,7 +8,7 @@ Turn PRDs, tickets, and accepted decisions into focused behavior checks that you
 
 CaseHatch keeps the agreed outcomes, their sources, and the tests checking them together. Your existing Codex or Claude Code session handles discovery. The CLI runs saved tests and reports what was actually exercised, passed, or left incomplete—without a model call, an account, or an API key.
 
-**Working MVP · `0.1.0-alpha.1` · TypeScript + Playwright 1.63.x–1.64.x · Node.js ≥22.12 · macOS/Linux.** Not yet published to npm. GitHub CI is included; broader platform validation remains pending. [Implementation status and limits](docs/STATUS.md).
+**Working alpha · `0.1.0-alpha.1` · TypeScript + Playwright 1.63.x–1.64.x · Node.js ≥22.12 · macOS/Linux.** Distributed through GitHub releases; not published to npm. The eight-job Linux/macOS, Node 22/24 and Playwright 1.63/1.64 CI matrix has passed. [Validation](docs/VALIDATION.md) · [Supported limits](docs/STATUS.md).
 
 Use it when your agent has implemented a feature and you want to check whether the tests cover the agreed behavior. CaseHatch connects each outcome to its source and actual execution evidence, so an omitted retry case or a skipped test stays visible.
 
