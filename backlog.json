@@ -1,0 +1,442 @@
+{
+  "project": "CaseHatch",
+  "created": "2026-10-15",
+  "issuesCreatedOnGitHub": false,
+  "issues": [
+    {
+      "planningId": "CH-001",
+      "title": "Repository and package scaffold",
+      "milestone": "M0",
+      "priority": "P0",
+      "dependencies": [],
+      "status": "implemented_local",
+      "githubIssueNumber": null,
+      "acceptanceCriteria": [
+        "TypeScript CLI project targets the documented Node baseline and locks dependencies.",
+        "Final license, maturity status and supported-path documentation are ready before publication.",
+        "No install command or success badge claims a nonexistent runtime."
+      ],
+      "validationNotes": "See docs/STATUS.md for local implementation evidence and remaining original acceptance work."
+    },
+    {
+      "planningId": "CH-002",
+      "title": "Canonical contracts and stable IDs",
+      "milestone": "M0",
+      "priority": "P0",
+      "dependencies": [
+        "CH-001"
+      ],
+      "status": "implemented_local",
+      "githubIssueNumber": null,
+      "acceptanceCriteria": [
+        "Config, source, decision, obligation, case and evidence records have versioned schemas.",
+        "Required/candidate/deferred/excluded states and obligation-to-case roll-up are explicit.",
+        "Illustrative data and empty required scope cannot satisfy a gate."
+      ],
+      "validationNotes": "See docs/STATUS.md for local implementation evidence and remaining original acceptance work."
+    },
+    {
+      "planningId": "CH-003",
+      "title": "CLI initialization and diagnostics",
+      "milestone": "M0",
+      "priority": "P0",
+      "dependencies": [
+        "CH-002"
+      ],
+      "status": "implemented_local",
+      "githubIssueNumber": null,
+      "acceptanceCriteria": [
+        "Init is idempotent, records ownership and preserves user files.",
+        "Doctor is read-only and reports missing runner/config/source access clearly.",
+        "Machine output and stable error/exit-code contracts work."
+      ],
+      "validationNotes": "See docs/STATUS.md for local implementation evidence and remaining original acceptance work."
+    },
+    {
+      "planningId": "CH-004",
+      "title": "Local context import and provenance",
+      "milestone": "M0",
+      "priority": "P0",
+      "dependencies": [
+        "CH-002",
+        "CH-003"
+      ],
+      "status": "implemented_local",
+      "githubIssueNumber": null,
+      "acceptanceCriteria": [
+        "Markdown/text sources retain original locators, hashes and capture metadata.",
+        "Unreadable and partially imported inputs remain visible.",
+        "Raw private context and artifacts are not automatically committed."
+      ],
+      "validationNotes": "See docs/STATUS.md for local implementation evidence and remaining original acceptance work."
+    },
+    {
+      "planningId": "CH-005",
+      "title": "Agent-normalized document and ticket import",
+      "milestone": "M1",
+      "priority": "P0",
+      "dependencies": [
+        "CH-004"
+      ],
+      "status": "implemented_local",
+      "githubIssueNumber": null,
+      "acceptanceCriteria": [
+        "Existing agent tools can supply normalized source text with origin and extraction limits.",
+        "Summaries and excerpts remain distinguishable from complete extraction.",
+        "No new connector authentication or credential copying is required by the alpha."
+      ],
+      "validationNotes": "See docs/STATUS.md for local implementation evidence and remaining original acceptance work."
+    },
+    {
+      "planningId": "CH-006",
+      "title": "Bounded feature brief and source conflicts",
+      "milestone": "M1",
+      "priority": "P0",
+      "dependencies": [
+        "CH-004",
+        "CH-005"
+      ],
+      "status": "partial",
+      "githubIssueNumber": null,
+      "acceptanceCriteria": [
+        "A compact bundle links relevant rules, actors, outcomes and exclusions to sources.",
+        "Conflicting rules and unreviewed important source sections are explicit.",
+        "Current implementation and timestamps do not silently override product authority."
+      ],
+      "validationNotes": "See docs/STATUS.md for local implementation evidence and remaining original acceptance work."
+    },
+    {
+      "planningId": "CH-007",
+      "title": "Decision memory and three-question limit",
+      "milestone": "M1",
+      "priority": "P0",
+      "dependencies": [
+        "CH-006"
+      ],
+      "status": "partial",
+      "githubIssueNumber": null,
+      "acceptanceCriteria": [
+        "Zero to three distinct material questions can be asked per feature revision.",
+        "Unchanged answers are reused and revisions cannot evade the limit.",
+        "Unresolved consequential intent remains incomplete after the question budget is exhausted."
+      ],
+      "validationNotes": "See docs/STATUS.md for local implementation evidence and remaining original acceptance work."
+    },
+    {
+      "planningId": "CH-008",
+      "title": "Bounded scenario proposal policy",
+      "milestone": "M1",
+      "priority": "P0",
+      "dependencies": [
+        "CH-006",
+        "CH-007"
+      ],
+      "status": "partial",
+      "githubIssueNumber": null,
+      "acceptanceCriteria": [
+        "Equivalent cases are deduplicated and distinct important outcomes are prioritized.",
+        "Source-backed requirements and inferred optional suggestions remain separate.",
+        "Low-impact deferred concerns produce at most one collapsed notice and do not repeat without relevant changes."
+      ],
+      "validationNotes": "See docs/STATUS.md for local implementation evidence and remaining original acceptance work."
+    },
+    {
+      "planningId": "CH-009",
+      "title": "Plan validation, freezing and revisions",
+      "milestone": "M1",
+      "priority": "P0",
+      "dependencies": [
+        "CH-002",
+        "CH-007",
+        "CH-008"
+      ],
+      "status": "implemented_local",
+      "githubIssueNumber": null,
+      "acceptanceCriteria": [
+        "Plan apply freezes stable obligations/cases and a scope digest without another model call.",
+        "Every required outcome has source/decision/invariant provenance.",
+        "Scope/denominator changes are recorded and cannot hide a failing required case."
+      ],
+      "validationNotes": "See docs/STATUS.md for local implementation evidence and remaining original acceptance work."
+    },
+    {
+      "planningId": "CH-010",
+      "title": "Synthetic app and resettable seeded regressions",
+      "milestone": "M0",
+      "priority": "P0",
+      "dependencies": [
+        "CH-002"
+      ],
+      "status": "implemented_local",
+      "githubIssueNumber": null,
+      "acceptanceCriteria": [
+        "A tiny TypeScript import fixture has documented launch/reset steps and synthetic data.",
+        "Existing happy-path tests pass while an intentional duplicate/retry bug can be triggered.",
+        "Fixture revisions and intended outcomes are documented independently of generated tests."
+      ],
+      "validationNotes": "See docs/STATUS.md for local implementation evidence and remaining original acceptance work."
+    },
+    {
+      "planningId": "CH-011",
+      "title": "Native test reuse and generation recipe",
+      "milestone": "M2",
+      "priority": "P0",
+      "dependencies": [
+        "CH-009",
+        "CH-010"
+      ],
+      "status": "implemented_local",
+      "githubIssueNumber": null,
+      "acceptanceCriteria": [
+        "Existing fixtures/tests are reused before new tests are generated.",
+        "Normal Playwright files carry stable case IDs and meaningful outcome mappings.",
+        "Tests run directly through Playwright without a CaseHatch model workflow."
+      ],
+      "validationNotes": "See docs/STATUS.md for local implementation evidence and remaining original acceptance work."
+    },
+    {
+      "planningId": "CH-012",
+      "title": "Playwright execution and evidence reporter",
+      "milestone": "M2",
+      "priority": "P0",
+      "dependencies": [
+        "CH-011"
+      ],
+      "status": "implemented_local",
+      "githubIssueNumber": null,
+      "acceptanceCriteria": [
+        "Collected suite bindings cover every selected required case/project variant exactly as declared.",
+        "Actual runner results preserve retries, skips, expected failures and setup errors.",
+        "Agent narratives or sample reports cannot replace execution evidence."
+      ],
+      "validationNotes": "See docs/STATUS.md for local implementation evidence and remaining original acceptance work."
+    },
+    {
+      "planningId": "CH-013",
+      "title": "Evidence revision and freshness rules",
+      "milestone": "M2",
+      "priority": "P0",
+      "dependencies": [
+        "CH-009",
+        "CH-012"
+      ],
+      "status": "implemented_local",
+      "githubIssueNumber": null,
+      "acceptanceCriteria": [
+        "Evidence identifies actual tested tree, plan, test/config/context and fixture fingerprints.",
+        "Changed relevant inputs invalidate evidence; dirty state is not attributed to a different pushed commit.",
+        "Alpha reruns conservatively instead of promising perfect impact-based reuse."
+      ],
+      "validationNotes": "See docs/STATUS.md for local implementation evidence and remaining original acceptance work."
+    },
+    {
+      "planningId": "CH-014",
+      "title": "Coverage and readiness evaluator",
+      "milestone": "M2",
+      "priority": "P0",
+      "dependencies": [
+        "CH-012",
+        "CH-013"
+      ],
+      "status": "implemented_local",
+      "githubIssueNumber": null,
+      "acceptanceCriteria": [
+        "Required obligation roll-up requires all required concrete case/project variants.",
+        "Execution coverage and passing share remain separate; 0/0 is NO_SCOPE.",
+        "Failure, incomplete, error and ready outcomes follow the documented priority and exit codes."
+      ],
+      "validationNotes": "See docs/STATUS.md for local implementation evidence and remaining original acceptance work."
+    },
+    {
+      "planningId": "CH-015",
+      "title": "Quiet terminal and canonical reports",
+      "milestone": "M3",
+      "priority": "P0",
+      "dependencies": [
+        "CH-014"
+      ],
+      "status": "implemented_local",
+      "githubIssueNumber": null,
+      "acceptanceCriteria": [
+        "Default success is one short summary with an optional collapsed risk count.",
+        "Failures and incomplete states provide expected/observed outcomes and artifact/source links.",
+        "JSON and Markdown render the same canonical report; local HTML is optional alpha polish."
+      ],
+      "validationNotes": "See docs/STATUS.md for local implementation evidence and remaining original acceptance work."
+    },
+    {
+      "planningId": "CH-016",
+      "title": "Saved-check CI replay and budget handling",
+      "milestone": "M3",
+      "priority": "P0",
+      "dependencies": [
+        "CH-012",
+        "CH-014",
+        "CH-015"
+      ],
+      "status": "implemented_local",
+      "githubIssueNumber": null,
+      "acceptanceCriteria": [
+        "The saved plan/tests replay without any model credentials or inference.",
+        "Budget expiry records partial results and unfinished cases, returning incomplete verification.",
+        "Cleanup is bounded and elapsed time is measured honestly."
+      ],
+      "validationNotes": "See docs/STATUS.md for local implementation evidence and remaining original acceptance work."
+    },
+    {
+      "planningId": "CH-017",
+      "title": "Native Claude Code and Codex skill packaging",
+      "milestone": "M4",
+      "priority": "P0",
+      "dependencies": [
+        "CH-009",
+        "CH-011",
+        "CH-015"
+      ],
+      "status": "partial",
+      "githubIssueNumber": null,
+      "acceptanceCriteria": [
+        "One canonical workflow is packaged through both documented project skill locations.",
+        "Plan/check/explain modes use the existing agent session and no nested agent process.",
+        "Both paths preserve existing instructions and complete a clean-setup example."
+      ],
+      "validationNotes": "See docs/STATUS.md for local implementation evidence and remaining original acceptance work."
+    },
+    {
+      "planningId": "CH-018",
+      "title": "Opt-in reversible pre-push integration",
+      "milestone": "M3",
+      "priority": "P0",
+      "dependencies": [
+        "CH-013",
+        "CH-015",
+        "CH-016"
+      ],
+      "status": "implemented_local",
+      "githubIssueNumber": null,
+      "acceptanceCriteria": [
+        "Install/uninstall preserve existing hooks and user edits and are idempotent.",
+        "Hook makes no model calls, asks no questions and verifies the supported pushed revision.",
+        "Unsupported multi-ref/non-HEAD pushes and relevant dirty-state mismatches are explicit."
+      ],
+      "validationNotes": "See docs/STATUS.md for local implementation evidence and remaining original acceptance work."
+    },
+    {
+      "planningId": "CH-019",
+      "title": "False-green contract and negative fixtures",
+      "milestone": "M3",
+      "priority": "P0",
+      "dependencies": [
+        "CH-007",
+        "CH-012",
+        "CH-014",
+        "CH-016"
+      ],
+      "status": "implemented_local",
+      "githubIssueNumber": null,
+      "acceptanceCriteria": [
+        "Fixtures cover zero scope, missing bindings/assertions, skipped/expected-fail/retry-pass and stale results.",
+        "Blocked setup, partial execution and illustrative artifacts cannot yield READY.",
+        "Consequential unresolved intent and denominator changes are tested explicitly."
+      ],
+      "validationNotes": "See docs/STATUS.md for local implementation evidence and remaining original acceptance work."
+    },
+    {
+      "planningId": "CH-020",
+      "title": "Held-out native-agent comparison",
+      "milestone": "M4",
+      "priority": "P0",
+      "dependencies": [
+        "CH-010",
+        "CH-017",
+        "CH-019"
+      ],
+      "status": "planned",
+      "githubIssueNumber": null,
+      "acceptanceCriteria": [
+        "At least 20 held-out changes across three small repos have reviewed intended behavior.",
+        "Baselines share model/context/environment and comparable budgets; repeated runs are recorded.",
+        "Publish suggestion relevance, regressions detected/missed, questions and user effort, including limitations."
+      ],
+      "validationNotes": "See docs/STATUS.md for local implementation evidence and remaining original acceptance work."
+    },
+    {
+      "planningId": "CH-021",
+      "title": "Package and platform smoke validation",
+      "milestone": "M4",
+      "priority": "P0",
+      "dependencies": [
+        "CH-016",
+        "CH-017",
+        "CH-018"
+      ],
+      "status": "partial",
+      "githubIssueNumber": null,
+      "acceptanceCriteria": [
+        "Document exact supported Node/Playwright/agent versions and operating systems.",
+        "Clean package install, runner invocation and hook install/uninstall work on advertised paths.",
+        "Unsupported environments fail with useful diagnostics."
+      ],
+      "validationNotes": "See docs/STATUS.md for local implementation evidence and remaining original acceptance work."
+    },
+    {
+      "planningId": "CH-022",
+      "title": "Quickstart, real demo and report screenshots",
+      "milestone": "M5",
+      "priority": "P0",
+      "dependencies": [
+        "CH-020",
+        "CH-021"
+      ],
+      "status": "partial",
+      "githubIssueNumber": null,
+      "acceptanceCriteria": [
+        "A fresh user reproduces the complete supported workflow from the README.",
+        "The clip exposes a real labeled seeded bug and links exact commands/revisions/artifacts.",
+        "No sample timings or illustrative JSON are presented as measured execution."
+      ],
+      "validationNotes": "See docs/STATUS.md for local implementation evidence and remaining original acceptance work."
+    },
+    {
+      "planningId": "CH-023",
+      "title": "Community setup and contribution path",
+      "milestone": "M5",
+      "priority": "P1",
+      "dependencies": [
+        "CH-001",
+        "CH-015"
+      ],
+      "status": "partial",
+      "githubIssueNumber": null,
+      "acceptanceCriteria": [
+        "Issues, Discussions, private vulnerability reporting, license and contribution policy are finalized.",
+        "Backlog milestones/labels and issue/PR templates are created in the actual repository.",
+        "At least three small contribution tasks have reproducible acceptance criteria."
+      ],
+      "validationNotes": "See docs/STATUS.md for local implementation evidence and remaining original acceptance work."
+    },
+    {
+      "planningId": "CH-024",
+      "title": "Public alpha and repeated-user validation",
+      "milestone": "M5",
+      "priority": "P0",
+      "dependencies": [
+        "CH-019",
+        "CH-020",
+        "CH-021",
+        "CH-022",
+        "CH-023"
+      ],
+      "status": "planned",
+      "githubIssueNumber": null,
+      "acceptanceCriteria": [
+        "Repository and package names are rechecked/reserved before publishing v0.1.0-alpha.",
+        "Five design partners use the workflow on repeated PRs and first-run friction is recorded.",
+        "Continue/narrow decisions use repeat value and baseline improvement, not star-count targets."
+      ],
+      "validationNotes": "See docs/STATUS.md for local implementation evidence and remaining original acceptance work."
+    }
+  ],
+  "implementationStatusDocument": "docs/STATUS.md",
+  "runtimeVersion": "0.1.0-alpha.1"
+}

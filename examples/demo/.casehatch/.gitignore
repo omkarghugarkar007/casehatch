@@ -1,0 +1,4 @@
+# CaseHatch private local state
+/context/
+/runs/
+/locks/

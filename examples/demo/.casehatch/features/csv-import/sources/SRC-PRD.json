@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "SRC-PRD",
+  "featureId": "csv-import",
+  "kind": "prd",
+  "path": "context/PRD.md",
+  "origin": "context/PRD.md",
+  "sha256": "f49ec7dfc5c13320c97cf29e3fe70fa0929a33acf6bc3abfb87d1ea546947108",
+  "capturedAt": "2026-10-15T19:07:28.273Z",
+  "extraction": "complete",
+  "limitations": []
+}

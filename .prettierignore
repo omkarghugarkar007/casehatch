@@ -1,0 +1,10 @@
+node_modules/
+dist/
+package-lock.json
+examples/csv-import/
+examples/demo/.casehatch/
+examples/demo/test-results/
+docs/plan/
+.casehatch/
+# Source fixtures retain the exact bytes referenced by the saved plan.
+examples/demo/context/

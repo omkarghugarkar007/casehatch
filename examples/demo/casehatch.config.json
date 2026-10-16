@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "activeFeature": "csv-import",
+  "runner": {
+    "adapter": "playwright",
+    "config": "playwright.config.ts"
+  },
+  "budgetSeconds": 60,
+  "generatedDirectories": ["test-results", "playwright-report"],
+  "environmentKeys": ["CI", "NODE_ENV", "CASEHATCH_DEMO_BUG", "PORT"]
+}

@@ -1,0 +1,37 @@
+name: Verify
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  contracts:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        node: ["22", "24"]
+        playwright: ["1.63.0", "1.64.1"]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm install --no-save --package-lock=false @playwright/test@${{ matrix.playwright }}
+        if: matrix.playwright != '1.64.1'
+      - run: npm run verify
+      - run: npm run demo:bug
+      - run: npm run format:check
+      - run: npm run smoke
+        if: matrix.os == 'ubuntu-latest' && matrix.node == '24' && matrix.playwright == '1.64.1'
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: demo-evidence-${{ matrix.os }}-node${{ matrix.node }}-pw${{ matrix.playwright }}
+          path: examples/demo/.casehatch/runs/
+          include-hidden-files: true
+          retention-days: 5

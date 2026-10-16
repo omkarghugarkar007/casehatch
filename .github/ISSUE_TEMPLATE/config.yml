@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and workflow feedback
+    url: https://github.com/omkarghugarkar007/casehatch/discussions
+    about: Share first-run friction, ask for help, or discuss a design before adding an adapter.
+  - name: Report a security vulnerability privately
+    url: https://github.com/omkarghugarkar007/casehatch/security/advisories/new
+    about: Keep exploit details and credentials out of public issues.

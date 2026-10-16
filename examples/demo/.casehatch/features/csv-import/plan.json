@@ -1,0 +1,262 @@
+{
+  "schemaVersion": 1,
+  "plan": {
+    "schemaVersion": 1,
+    "featureId": "csv-import",
+    "title": "Synthetic customer CSV import",
+    "scopeRevision": 1,
+    "brief": {
+      "goal": "Import customer rows safely, with stable retry identity.",
+      "actors": [
+        "Authenticated tenant administrator (header fixture)"
+      ],
+      "rules": [
+        "One effective import per tenant and content",
+        "Atomic validation",
+        "10 MiB inclusive limit"
+      ],
+      "exclusions": [
+        "Quoted CSV fields and Excel files",
+        "Production authentication",
+        "Display filename variations"
+      ]
+    },
+    "sources": [
+      {
+        "id": "SRC-BRD",
+        "sha256": "90aca48d31accbf327f509e2f1fa62935f739dd6eaa41f575d9c98f506c3ed9d"
+      },
+      {
+        "id": "SRC-PRD",
+        "sha256": "f49ec7dfc5c13320c97cf29e3fe70fa0929a33acf6bc3abfb87d1ea546947108"
+      },
+      {
+        "id": "SRC-TICKET",
+        "sha256": "f93bb01ed20ba4de2b8189f2ee8d5ae03b882bcc7438b22cfa7c80e9f8d8098c"
+      },
+      {
+        "id": "SRC-DECISIONS",
+        "sha256": "9258d10001c90463896b06a1b2ec0966068eef98f5702869a66ba780b18ddae6"
+      }
+    ],
+    "decisions": [],
+    "obligations": [
+      {
+        "id": "O-VALID",
+        "title": "Valid import",
+        "scope": "required",
+        "provenance": [
+          "SRC-PRD#PR-01"
+        ],
+        "requiredCaseIds": [
+          "CH-CSV-001"
+        ]
+      },
+      {
+        "id": "O-IDENTITY",
+        "title": "Import identity",
+        "scope": "required",
+        "provenance": [
+          "SRC-BRD#BR-02",
+          "SRC-DECISIONS#DEC-02"
+        ],
+        "requiredCaseIds": [
+          "CH-CSV-002",
+          "CH-CSV-003"
+        ]
+      },
+      {
+        "id": "O-ATOMIC",
+        "title": "Atomic validation",
+        "scope": "required",
+        "provenance": [
+          "SRC-DECISIONS#DEC-01"
+        ],
+        "requiredCaseIds": [
+          "CH-CSV-004"
+        ]
+      },
+      {
+        "id": "O-ISOLATION",
+        "title": "Tenant isolation",
+        "scope": "required",
+        "provenance": [
+          "SRC-BRD#BR-01",
+          "SRC-DECISIONS#DEC-03"
+        ],
+        "requiredCaseIds": [
+          "CH-CSV-005"
+        ]
+      },
+      {
+        "id": "O-SIZE",
+        "title": "Size boundary",
+        "scope": "required",
+        "provenance": [
+          "SRC-PRD#PR-03"
+        ],
+        "requiredCaseIds": [
+          "CH-CSV-006",
+          "CH-CSV-007"
+        ]
+      }
+    ],
+    "cases": [
+      {
+        "id": "CH-CSV-001",
+        "title": "Valid import",
+        "expectedOutcome": "One job and exactly the two requested tenant-scoped rows.",
+        "provenance": [
+          "SRC-PRD#PR-01"
+        ],
+        "binding": {
+          "file": "tests/import.spec.ts",
+          "projects": [
+            "api"
+          ]
+        },
+        "assertions": [
+          {
+            "id": "rows",
+            "description": "One job and exactly the two requested tenant-scoped rows."
+          }
+        ]
+      },
+      {
+        "id": "CH-CSV-002",
+        "title": "New-key duplicate",
+        "expectedOutcome": "HTTP 409 returns original job ID; one job and one effective import.",
+        "provenance": [
+          "SRC-PRD#PR-02"
+        ],
+        "binding": {
+          "file": "tests/import.spec.ts",
+          "projects": [
+            "api"
+          ]
+        },
+        "assertions": [
+          {
+            "id": "identity",
+            "description": "HTTP 409 returns original job ID; one job and one effective import."
+          }
+        ]
+      },
+      {
+        "id": "CH-CSV-003",
+        "title": "Same-key retry",
+        "expectedOutcome": "HTTP 200 returns original job ID; one job and two rows after retry.",
+        "provenance": [
+          "SRC-DECISIONS#DEC-02"
+        ],
+        "binding": {
+          "file": "tests/import.spec.ts",
+          "projects": [
+            "api"
+          ]
+        },
+        "assertions": [
+          {
+            "id": "identity",
+            "description": "HTTP 200 returns original job ID; one job and two rows after retry."
+          }
+        ]
+      },
+      {
+        "id": "CH-CSV-004",
+        "title": "Atomic validation",
+        "expectedOutcome": "HTTP 422 with row 4 error; no rows or jobs persisted.",
+        "provenance": [
+          "SRC-DECISIONS#DEC-01"
+        ],
+        "binding": {
+          "file": "tests/import.spec.ts",
+          "projects": [
+            "api"
+          ]
+        },
+        "assertions": [
+          {
+            "id": "atomic",
+            "description": "HTTP 422 with row 4 error; no rows or jobs persisted."
+          }
+        ]
+      },
+      {
+        "id": "CH-CSV-005",
+        "title": "Tenant isolation",
+        "expectedOutcome": "Other tenant receives HTTP 404 and no rows; original tenant retains access.",
+        "provenance": [
+          "SRC-BRD#BR-01",
+          "SRC-DECISIONS#DEC-03"
+        ],
+        "binding": {
+          "file": "tests/import.spec.ts",
+          "projects": [
+            "api"
+          ]
+        },
+        "assertions": [
+          {
+            "id": "isolation",
+            "description": "Other tenant receives HTTP 404 and no rows; original tenant retains access."
+          }
+        ]
+      },
+      {
+        "id": "CH-CSV-006",
+        "title": "Above size limit",
+        "expectedOutcome": "10 MiB plus one byte returns HTTP 413 with no jobs or rows.",
+        "provenance": [
+          "SRC-PRD#PR-03"
+        ],
+        "binding": {
+          "file": "tests/import.spec.ts",
+          "projects": [
+            "api"
+          ]
+        },
+        "assertions": [
+          {
+            "id": "boundary",
+            "description": "10 MiB plus one byte returns HTTP 413 with no jobs or rows."
+          }
+        ]
+      },
+      {
+        "id": "CH-CSV-007",
+        "title": "Exact size limit",
+        "expectedOutcome": "Exactly 10 MiB returns HTTP 201 with one job and two rows.",
+        "provenance": [
+          "SRC-PRD#PR-03"
+        ],
+        "binding": {
+          "file": "tests/import.spec.ts",
+          "projects": [
+            "api"
+          ]
+        },
+        "assertions": [
+          {
+            "id": "boundary",
+            "description": "Exactly 10 MiB returns HTTP 201 with one job and two rows."
+          }
+        ]
+      }
+    ],
+    "unresolved": [],
+    "conflicts": [],
+    "deferredConcerns": [
+      {
+        "id": "RISK-FILENAME",
+        "title": "Display-only filename Unicode variants",
+        "reason": "Optional display concern outside import identity and data correctness.",
+        "acknowledged": true
+      }
+    ]
+  },
+  "digest": "b9ff65992af5bfbb9452bd4e079c71061d9ec88499883aed22653444f1bac5ef",
+  "appliedAt": "2026-10-15T18:54:06.763Z",
+  "previousDigest": null,
+  "scopeDelta": []
+}

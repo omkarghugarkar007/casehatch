@@ -1,0 +1,286 @@
+{
+  "schemaVersion": "0.1-design",
+  "exampleOnly": true,
+  "featureId": "csv-import",
+  "scopeRevision": 1,
+  "title": "Synthetic customer CSV import",
+  "state": "illustrative_plan",
+  "sources": [
+    {
+      "id": "SRC-BRD",
+      "kind": "brd",
+      "path": "context/BRD.md",
+      "sha256": "90aca48d31accbf327f509e2f1fa62935f739dd6eaa41f575d9c98f506c3ed9d",
+      "captureDate": "2026-10-15",
+      "extractionState": "complete",
+      "synthetic": true
+    },
+    {
+      "id": "SRC-PRD",
+      "kind": "prd",
+      "path": "context/PRD.md",
+      "sha256": "f49ec7dfc5c13320c97cf29e3fe70fa0929a33acf6bc3abfb87d1ea546947108",
+      "captureDate": "2026-10-15",
+      "extractionState": "complete",
+      "synthetic": true
+    },
+    {
+      "id": "SRC-TICKET",
+      "kind": "ticket",
+      "path": "context/TICKET.md",
+      "sha256": "f93bb01ed20ba4de2b8189f2ee8d5ae03b882bcc7438b22cfa7c80e9f8d8098c",
+      "captureDate": "2026-10-15",
+      "extractionState": "complete",
+      "synthetic": true
+    }
+  ],
+  "clarification": {
+    "questionLimit": 3,
+    "questionsAsked": 2,
+    "decisions": [
+      {
+        "id": "DEC-001",
+        "question": "Should one invalid row reject the whole batch, or should valid rows be imported?",
+        "answer": "Reject the whole batch. Return row errors and persist no customer rows.",
+        "basis": [
+          "SRC-BRD#BR-03",
+          "SRC-PRD#PR-04",
+          "SRC-TICKET#Clarification needed"
+        ],
+        "state": "illustrative_developer_answer"
+      },
+      {
+        "id": "DEC-002",
+        "question": "After a timeout, what should a retry with the same idempotency key return?",
+        "answer": "Return the existing job ID with HTTP 200. Do not create another job or import. A new-key duplicate-content request still follows PR-02.",
+        "basis": [
+          "SRC-BRD#BR-02",
+          "SRC-PRD#PR-04",
+          "SRC-TICKET#Clarification needed"
+        ],
+        "state": "illustrative_developer_answer"
+      }
+    ]
+  },
+  "obligations": [
+    {
+      "id": "O-CSV-001",
+      "title": "Valid import outcome",
+      "scope": "required",
+      "requiredCaseIds": [
+        "CH-CSV-001"
+      ],
+      "provenance": [
+        "SRC-PRD#PR-01"
+      ]
+    },
+    {
+      "id": "O-CSV-002",
+      "title": "Duplicate/retry idempotency",
+      "scope": "required",
+      "requiredCaseIds": [
+        "CH-CSV-002",
+        "CH-CSV-003"
+      ],
+      "provenance": [
+        "SRC-BRD#BR-02",
+        "SRC-PRD#PR-02",
+        "DEC-002"
+      ]
+    },
+    {
+      "id": "O-CSV-003",
+      "title": "Atomic validation",
+      "scope": "required",
+      "requiredCaseIds": [
+        "CH-CSV-004"
+      ],
+      "provenance": [
+        "DEC-001"
+      ]
+    },
+    {
+      "id": "O-CSV-004",
+      "title": "Tenant isolation",
+      "scope": "required",
+      "requiredCaseIds": [
+        "CH-CSV-005"
+      ],
+      "provenance": [
+        "SRC-BRD#BR-01"
+      ]
+    },
+    {
+      "id": "O-CSV-005",
+      "title": "File size boundary",
+      "scope": "required",
+      "requiredCaseIds": [
+        "CH-CSV-006",
+        "CH-CSV-007"
+      ],
+      "provenance": [
+        "SRC-PRD#PR-03"
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "CH-CSV-001",
+      "obligationIds": [
+        "O-CSV-001"
+      ],
+      "title": "Valid import creates the expected rows",
+      "expectedOutcome": "A valid CSV creates one job and exactly the expected tenant-scoped rows.",
+      "provenance": [
+        "SRC-PRD#PR-01"
+      ],
+      "testBinding": {
+        "state": "planned_not_implemented",
+        "adapter": "playwright",
+        "file": "tests/behavior/csv-import.spec.ts",
+        "annotation": {
+          "type": "casehatch",
+          "description": "CH-CSV-001"
+        }
+      },
+      "assertionReview": "pending_real_implementation"
+    },
+    {
+      "id": "CH-CSV-002",
+      "obligationIds": [
+        "O-CSV-002"
+      ],
+      "title": "A new-key duplicate file does not import again",
+      "expectedOutcome": "HTTP 409 includes the existing job ID; the job/effective-import count remains one.",
+      "provenance": [
+        "SRC-BRD#BR-02",
+        "SRC-PRD#PR-02"
+      ],
+      "testBinding": {
+        "state": "planned_not_implemented",
+        "adapter": "playwright",
+        "file": "tests/behavior/csv-import.spec.ts",
+        "annotation": {
+          "type": "casehatch",
+          "description": "CH-CSV-002"
+        }
+      },
+      "assertionReview": "pending_real_implementation"
+    },
+    {
+      "id": "CH-CSV-003",
+      "obligationIds": [
+        "O-CSV-002"
+      ],
+      "title": "A same-key retry after timeout reuses the job",
+      "expectedOutcome": "HTTP 200 returns the original job ID; no second job or rows are created.",
+      "provenance": [
+        "DEC-002"
+      ],
+      "testBinding": {
+        "state": "planned_not_implemented",
+        "adapter": "playwright",
+        "file": "tests/behavior/csv-import.spec.ts",
+        "annotation": {
+          "type": "casehatch",
+          "description": "CH-CSV-003"
+        }
+      },
+      "assertionReview": "pending_real_implementation"
+    },
+    {
+      "id": "CH-CSV-004",
+      "obligationIds": [
+        "O-CSV-003"
+      ],
+      "title": "One invalid row rejects the complete batch",
+      "expectedOutcome": "The response includes row errors and the batch persists no customer rows.",
+      "provenance": [
+        "DEC-001"
+      ],
+      "testBinding": {
+        "state": "planned_not_implemented",
+        "adapter": "playwright",
+        "file": "tests/behavior/csv-import.spec.ts",
+        "annotation": {
+          "type": "casehatch",
+          "description": "CH-CSV-004"
+        }
+      },
+      "assertionReview": "pending_real_implementation"
+    },
+    {
+      "id": "CH-CSV-005",
+      "obligationIds": [
+        "O-CSV-004"
+      ],
+      "title": "Another tenant cannot access an import",
+      "expectedOutcome": "Cross-tenant job access is denied and no other-tenant data is disclosed or changed.",
+      "provenance": [
+        "SRC-BRD#BR-01"
+      ],
+      "testBinding": {
+        "state": "planned_not_implemented",
+        "adapter": "playwright",
+        "file": "tests/behavior/csv-import.spec.ts",
+        "annotation": {
+          "type": "casehatch",
+          "description": "CH-CSV-005"
+        }
+      },
+      "assertionReview": "pending_real_implementation"
+    },
+    {
+      "id": "CH-CSV-006",
+      "obligationIds": [
+        "O-CSV-005"
+      ],
+      "title": "Above-limit file is rejected before import",
+      "expectedOutcome": "A file larger than 10 MiB is rejected; no import side effect occurs.",
+      "provenance": [
+        "SRC-PRD#PR-03"
+      ],
+      "testBinding": {
+        "state": "planned_not_implemented",
+        "adapter": "playwright",
+        "file": "tests/behavior/csv-import.spec.ts",
+        "annotation": {
+          "type": "casehatch",
+          "description": "CH-CSV-006"
+        }
+      },
+      "assertionReview": "pending_real_implementation"
+    },
+    {
+      "id": "CH-CSV-007",
+      "obligationIds": [
+        "O-CSV-005"
+      ],
+      "title": "A file at the limit remains allowed",
+      "expectedOutcome": "A valid CSV of exactly 10 MiB is accepted under the normal import rule.",
+      "provenance": [
+        "SRC-PRD#PR-03"
+      ],
+      "testBinding": {
+        "state": "planned_not_implemented",
+        "adapter": "playwright",
+        "file": "tests/behavior/csv-import.spec.ts",
+        "annotation": {
+          "type": "casehatch",
+          "description": "CH-CSV-007"
+        }
+      },
+      "assertionReview": "pending_real_implementation"
+    }
+  ],
+  "deferredConcerns": [
+    {
+      "id": "RISK-CSV-001",
+      "title": "Combining Unicode characters in display-only filenames",
+      "priority": "low",
+      "reason": "Optional display variation; content identity and import correctness remain required.",
+      "notification": "acknowledged_until_relevant_change"
+    }
+  ],
+  "unresolvedRequiredIntent": []
+}

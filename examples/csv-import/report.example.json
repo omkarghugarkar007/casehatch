@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "0.1-design",
+  "exampleOnly": true,
+  "evidenceOrigin": "illustrative_not_executed",
+  "featureId": "csv-import",
+  "scopeRevision": 1,
+  "runId": "ILLUSTRATIVE-NOT-A-RUN",
+  "testedRevision": null,
+  "readiness": "FAIL",
+  "exitCode": 1,
+  "obligationCoverage": {
+    "required": 5,
+    "freshlyExecuted": 3,
+    "freshlyPassed": 2,
+    "executionPercent": 60.0,
+    "passingPercent": 40.0
+  },
+  "caseResults": [
+    {
+      "caseId": "CH-CSV-001",
+      "status": "passed"
+    },
+    {
+      "caseId": "CH-CSV-002",
+      "status": "passed"
+    },
+    {
+      "caseId": "CH-CSV-003",
+      "status": "blocked"
+    },
+    {
+      "caseId": "CH-CSV-004",
+      "status": "passed"
+    },
+    {
+      "caseId": "CH-CSV-005",
+      "status": "stale"
+    },
+    {
+      "caseId": "CH-CSV-006",
+      "status": "product_failed"
+    },
+    {
+      "caseId": "CH-CSV-007",
+      "status": "passed"
+    }
+  ],
+  "notes": [
+    "Illustrative JSON cannot satisfy a check or hook.",
+    "One obligation requires two idempotency cases; the blocked retry prevents its complete execution.",
+    "The size obligation was exercised but failed one required boundary case.",
+    "One deferred low-priority concern remains outside the required denominator."
+  ]
+}

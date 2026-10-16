@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "0.1-design",
+  "exampleOnly": true,
+  "activeFeature": "csv-import",
+  "agentMode": "existing_session",
+  "runner": {
+    "adapter": "playwright",
+    "config": "playwright.config.ts",
+    "project": "chromium",
+    "useInstalledDependency": true
+  },
+  "policy": {
+    "maxQuestions": 3,
+    "checkBudgetSeconds": 60,
+    "allowModelCallsDuringCheck": false,
+    "flakyCanPass": false,
+    "emptyScopeCanPass": false,
+    "defaultOptionalRiskNotices": 1
+  },
+  "retention": {
+    "rawContextCommittedByDefault": false,
+    "runArtifactsGitIgnored": true
+  }
+}

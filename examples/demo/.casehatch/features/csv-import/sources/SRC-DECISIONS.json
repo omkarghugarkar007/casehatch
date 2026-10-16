@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "SRC-DECISIONS",
+  "featureId": "csv-import",
+  "kind": "decision",
+  "path": "context/DECISIONS.md",
+  "origin": "context/DECISIONS.md",
+  "sha256": "9258d10001c90463896b06a1b2ec0966068eef98f5702869a66ba780b18ddae6",
+  "capturedAt": "2026-10-15T19:07:28.493Z",
+  "extraction": "complete",
+  "limitations": []
+}

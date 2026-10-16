@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "SRC-BRD",
+  "featureId": "csv-import",
+  "kind": "brd",
+  "path": "context/BRD.md",
+  "origin": "context/BRD.md",
+  "sha256": "90aca48d31accbf327f509e2f1fa62935f739dd6eaa41f575d9c98f506c3ed9d",
+  "capturedAt": "2026-10-15T19:07:28.160Z",
+  "extraction": "complete",
+  "limitations": []
+}

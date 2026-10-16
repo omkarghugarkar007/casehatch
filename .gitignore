@@ -1,0 +1,12 @@
+node_modules/
+dist/
+*.tgz
+.DS_Store
+.casehatch/context/
+.casehatch/runs/
+.casehatch/locks/
+test-results/
+playwright-report/
+.env
+.env.*
+!.env.example

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "SRC-TICKET",
+  "featureId": "csv-import",
+  "kind": "ticket",
+  "path": "context/TICKET.md",
+  "origin": "context/TICKET.md",
+  "sha256": "f93bb01ed20ba4de2b8189f2ee8d5ae03b882bcc7438b22cfa7c80e9f8d8098c",
+  "capturedAt": "2026-10-15T19:07:28.384Z",
+  "extraction": "complete",
+  "limitations": []
+}

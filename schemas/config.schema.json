@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "number",
+      "const": 1
+    },
+    "activeFeature": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,79}$"
+    },
+    "runner": {
+      "type": "object",
+      "properties": {
+        "adapter": {
+          "type": "string",
+          "const": "playwright"
+        },
+        "config": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!\\/)(?![A-Za-z]:)(?!.*\\\\)(?!.*(?:^|\\/)\\.{1,2}(?:\\/|$))(?!.*\\/\\/)(?!.*\\/$)[^\\u0000]+$"
+        }
+      },
+      "required": ["adapter", "config"],
+      "additionalProperties": false
+    },
+    "budgetSeconds": {
+      "default": 60,
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 86400
+    },
+    "generatedDirectories": {
+      "default": ["test-results", "playwright-report"],
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "^(?!\\/)(?![A-Za-z]:)(?!.*\\\\)(?!.*(?:^|\\/)\\.{1,2}(?:\\/|$))(?!.*\\/\\/)(?!.*\\/$)[^\\u0000]+$"
+      }
+    },
+    "environmentKeys": {
+      "default": ["CI", "NODE_ENV"],
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "runner",
+    "budgetSeconds",
+    "generatedDirectories",
+    "environmentKeys"
+  ],
+  "additionalProperties": false
+}

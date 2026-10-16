@@ -1,0 +1,24 @@
+name: Feature proposal
+description: Propose a focused workflow improvement or adapter.
+title: "[Proposal] "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Repeated user problem
+      description: Explain the concrete task and current friction.
+    validations:
+      required: true
+  - type: textarea
+    id: smallest
+    attributes:
+      label: Smallest useful change
+      description: Describe the narrowest implementation that would help.
+    validations:
+      required: true
+  - type: textarea
+    id: contract
+    attributes:
+      label: Contract and UX impact
+      description: Explain impacts on context, question count, coverage semantics, model calls and setup.
